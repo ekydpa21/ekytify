@@ -58,6 +58,7 @@ const Player = () => {
   useEffect(() => {
     if (spotifyApi.getAccessToken() && !currentTrackId) {
       fetchCurrentSong()
+      setVolume(50)
     }
   }, [currentTrackId, spotifyApi, session])
 
