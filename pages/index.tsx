@@ -1,11 +1,13 @@
 import type { NextPage } from "next"
 import { getSession } from "next-auth/react"
+import { useRecoilValue } from "recoil"
+import { currentTrackIdState } from "../atoms/songAtom"
 import Content from "../components/Content"
 import Player from "../components/Player"
 import Sidebar from "../components/Sidebar"
 
-const Home: NextPage = (session) => {
-  console.log(session)
+const Home: NextPage = () => {
+  const currentTrackId = useRecoilValue(currentTrackIdState)
 
   return (
     <div className="bg-black h-screen overflow-hidden">
@@ -14,9 +16,11 @@ const Home: NextPage = (session) => {
         <Content />
       </main>
 
-      <div className="sticky bottom-0">
-        <Player />
-      </div>
+      {currentTrackId && (
+        <div className="sticky bottom-0">
+          <Player />
+        </div>
+      )}
     </div>
   )
 }

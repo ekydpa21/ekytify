@@ -1,9 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap");
 
 @layer components {
   .player-button {
     @apply w-6 h-6 cursor-pointer hover:scale-125 transition transform duration-100 ease-out;
   }
+}
+
+body {
+  font-family: "Inter", sans-serif;
 }

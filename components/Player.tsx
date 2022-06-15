@@ -72,10 +72,10 @@ const Player = () => {
     <div className="w-full grid grid-cols-3 text-xs md:text-base text-white justify-center items-center py-5 px-4 md:px-10 bg-gradient-to-b from-[#202020] to-[#121212]">
       {/* Left Side */}
       <div className="flex items-center space-x-0 md:space-x-4">
-        <img className="hidden md:imline lg:inline w-12 h-12" src={songInfo?.album?.images?.[0]?.url} alt="" />
-        <div className="overflow-hidden max-w-[8rem]">
-          <h3 className="whitespace-nowrap">{songInfo?.name}</h3>
-          <h3 className="whitespace-nowrap">{songInfo?.artists?.[0]?.name}</h3>
+        <img className="hidden md:inline w-12 h-12" src={songInfo?.album?.images?.[0]?.url} alt="" />
+        <div className="overflow-hidden max-w-[90%] md:max-w-[100%]">
+          <h3 className="whitespace-nowrap truncate">{songInfo?.name}</h3>
+          <h3 className="whitespace-nowrap truncate text-sm text-gray-400">{songInfo?.artists?.[0]?.name}</h3>
         </div>
       </div>
 

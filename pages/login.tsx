@@ -1,4 +1,5 @@
-import { getProviders, signIn } from "next-auth/react"
+import { getProviders, getSession, signIn } from "next-auth/react"
+import { useRouter } from "next/router"
 
 function login({ providers }: any) {
   return (
@@ -18,8 +19,23 @@ function login({ providers }: any) {
 
 export default login
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context: any) {
   const providers = await getProviders()
+  const session = await getSession(context)
+
+  // const router = useRouter()
+
+  // const currentPath = router.pathname
+  console.log(context)
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    }
+  }
 
   return {
     props: { providers },

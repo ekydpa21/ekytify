@@ -16,7 +16,7 @@ async function refreshAccessToken(token) {
       refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
     }
   } catch (error) {
-    console.log(error)
+    console.log(error, "<< rt")
 
     return {
       ...token,

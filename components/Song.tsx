@@ -17,7 +17,7 @@ function Song({ order, track }: any) {
   }
 
   return (
-    <div className="grid grid-cols-2 text-gray-500 py-4 px-5 hover:bg-[#b3b3b3]/10 hover:text-white rounded-lg cursor-pointer" onClick={playSong}>
+    <div className="grid grid-cols-2 text-gray-400 py-2 px-5 hover:bg-[#b3b3b3]/10 hover:text-white rounded-lg cursor-pointer" onClick={playSong}>
       <div className="flex items-center space-x-4">
         <p className="text-lg">{order}</p>
         <img className="w-10 h-10" src={`${track?.track?.album?.images?.[0]?.url}`} alt="Album's Cover" />
