@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "@heroicons/react/outline"
+import { ChevronDownIcon, XIcon } from "@heroicons/react/outline"
 import { signOut, useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
 import { shuffle } from "lodash"
@@ -6,6 +6,9 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { playlistState, playlistIdState } from "../atoms/playlistAtom"
 import useSpotify from "../hooks/useSpotify"
 import Songs from "./Songs"
+import useSongInfo from "../hooks/useSongInfo"
+import { errorState } from "../atoms/errorAtom"
+import Modal from "./Modal"
 
 const backgroundColors = ["from-red-500", "from-blue-500", "from-green-500", "from-indigo-500", "from-yellow-500", "from-purple-500", "from-pink-500"]
 
@@ -16,6 +19,8 @@ function Content() {
   const playlistId = useRecoilValue(playlistIdState)
   const [playlist, setPlaylist] = useRecoilState(playlistState)
   const [openModal, setOpenModal] = useState(false)
+  // const error = useRecoilValue(errorState)
+  const [error, setError] = useRecoilState(errorState)
 
   useEffect(() => {
     const color = shuffle(backgroundColors).pop()
@@ -73,6 +78,8 @@ function Content() {
           <Songs />
         </div>
       </div>
+
+      {error.reason === "NO_ACTIVE_DEVICE" && <Modal title="Something Wrong" message="No active device found, please active your nearby device and try again" closeButton={() => setError({})} />}
     </div>
   )
 }

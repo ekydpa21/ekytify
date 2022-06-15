@@ -23,11 +23,6 @@ export async function getServerSideProps(context: any) {
   const providers = await getProviders()
   const session = await getSession(context)
 
-  // const router = useRouter()
-
-  // const currentPath = router.pathname
-  console.log(context)
-
   if (session) {
     return {
       redirect: {

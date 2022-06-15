@@ -1,4 +1,6 @@
+import { useState } from "react"
 import { useRecoilState } from "recoil"
+import { errorState } from "../atoms/errorAtom"
 import { currentTrackIdState, isPlayingState } from "../atoms/songAtom"
 import useSpotify from "../hooks/useSpotify"
 import { timeFormatter } from "../lib/timeFormatter"
@@ -7,12 +9,17 @@ function Song({ order, track }: any) {
   const spotifyApi = useSpotify()
   const [currentTrackId, setCurrentTrackId] = useRecoilState(currentTrackIdState)
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState)
+  const [error, setError] = useRecoilState(errorState)
 
   const playSong = async () => {
-    if (spotifyApi.getAccessToken()) {
-      await spotifyApi.play({ uris: [track.track.uri] })
-      setCurrentTrackId(track.track.id)
-      setIsPlaying(true)
+    try {
+      if (spotifyApi.getAccessToken()) {
+        await spotifyApi.play({ uris: [track.track.uri] })
+        setCurrentTrackId(track.track.id)
+        setIsPlaying(true)
+      }
+    } catch (error: any) {
+      setError(error.body.error)
     }
   }
 
